@@ -1,0 +1,151 @@
+@font-face {
+  font-family: "SofiaPro";
+  src: url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Regular-Az.otf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SofiaPro";
+  src: url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Medium-Az.otf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SofiaPro";
+  src: url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Semi-Bold-Az.otf")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KarmeHandwritten";
+  src: url("./assets/fonts/KarmeHandwritten-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "CarlaSans";
+  src: url("./assets/fonts/Carla-Sans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #00c1b8;
+    --secondary: #09625d;
+    --white: #ffffff;
+    --black: #000000;
+    --background: #ecfffe;
+    --text: #404040;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer components {
+  .text-72 {
+    font-family: "SofiaPro", sans-serif;
+    font-weight: 500;
+    font-size: clamp(3rem, 1.125rem + 6vw, 4.5rem);
+    line-height: 1.4;
+    color: var(--primary);
+  }
+  .text-48 {
+    font-family: "SofiaPro", sans-serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 1.5714rem + 1.9048vw, 3rem);
+    line-height: 1.4;
+    color: var(--secondary);
+  }
+  .text-40 {
+    font-family: "KarmeHandwritten", sans-serif;
+    font-size: clamp(1.6875rem, 1.3393rem + 1.5476vw, 2.5rem);
+    line-height: 1.4;
+  }
+  .text-32 {
+    font-family: "SofiaPro", sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.375rem, 1.1071rem + 1.1905vw, 2rem);
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .text-30 {
+    font-family: "KarmeHandwritten", sans-serif;
+    font-size: clamp(1.25rem, 0.9821rem + 1.1905vw, 1.875rem);
+    line-height: 1.4;
+  }
+  .text-20 {
+    font-family: "SofiaPro", sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 0.8929rem + 0.4762vw, 1.25rem);
+    line-height: 1.4;
+  }
+  .text-18 {
+    font-family: "SofiaPro", sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.875rem, 0.7679rem + 0.4762vw, 1.125rem);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
