@@ -41,10 +41,13 @@ const menuImages: Record<string, string> = {
 
 interface MenuSectionProps {
   showOrderButton?: boolean;
+  /** Heading level for the "menu" title (the Menu page makes it the h1). */
+  headingAs?: "h1" | "h2";
 }
 
 export default function MenuSection({
   showOrderButton = true,
+  headingAs: Heading = "h2",
 }: MenuSectionProps) {
   const [activeTab, setActiveTab] = useState("Momo");
 
@@ -54,7 +57,7 @@ export default function MenuSection({
 
       <div className="relative z-10 max-w-[821px] mx-auto px-5 py-16 lg:py-[72px]">
         {/* "MENU" heading */}
-        <h2 className="text-72 text-taipo uppercase">menu</h2>
+        <Heading className="text-72 text-taipo uppercase">menu</Heading>
         {/* Main content: two columns */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Right column: category tabs + menu image */}
@@ -83,7 +86,9 @@ export default function MenuSection({
             <div className="flex-1 flex justify-center flex-col items-center gap-4 md:gap-0">
               <img
                 src={menuImages[activeTab]}
-                alt={`${activeTab} menu`}
+                alt={`${activeTab} menu at Taipo Arlington`}
+                loading="lazy"
+                decoding="async"
                 className="w-full md:h-[608px] object-contain object-top md:-mt-[120px]"
               />
               <TaipoButtonSecondary

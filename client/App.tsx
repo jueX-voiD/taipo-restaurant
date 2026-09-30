@@ -3,7 +3,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   BrowserRouter,
   Routes,
@@ -12,16 +11,16 @@ import {
   useLocation,
 } from "react-router-dom";
 import { ReactLenis, useLenis } from "lenis/react";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Reservation from "./pages/Reservation";
-import OrderNow from "./pages/OrderNow";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Home ships in the main bundle; every other page loads on demand.
+const Menu = lazy(() => import("./pages/Menu"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Reservation = lazy(() => import("./pages/Reservation"));
+const OrderNow = lazy(() => import("./pages/OrderNow"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Reset scroll position to the top on every route change.
 function ScrollToTop() {
@@ -36,13 +35,13 @@ function ScrollToTop() {
 }
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <ReactLenis root options={{ lerp: 0.1 }}>
-        <BrowserRouter>
-          <ScrollToTop />
+  <TooltipProvider>
+    <Toaster />
+    <Sonner />
+    <ReactLenis root options={{ lerp: 0.1 }}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
@@ -70,10 +69,10 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </ReactLenis>
-    </TooltipProvider>
-  </QueryClientProvider>
+        </Suspense>
+      </BrowserRouter>
+    </ReactLenis>
+  </TooltipProvider>
 );
 
 createRoot(document.getElementById("root")!).render(<App />);

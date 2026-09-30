@@ -128,12 +128,7 @@ function SpecialsSection() {
 export default function OrderNow() {
   return (
     <div className="bg-taipo">
-      <Seo
-        title="Order Nepali-Inspired Cuisine Online in Arlington - Taipo"
-        description="Order authentic Nepali-inspired dishes from Taipo in Arlington, TX, for pickup or delivery. Enjoy bold flavors with the convenience of online ordering."
-        path="/order-now/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Uber-Delivery.webp"
-      />
+      <Seo path="/order-now/" />
       <Navbar />
       <main>
         <HeroSection />

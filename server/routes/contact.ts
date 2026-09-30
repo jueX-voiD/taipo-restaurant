@@ -32,8 +32,17 @@ function getTransporter(): Transporter {
   return transporter;
 }
 
+const esc = (s: unknown) =>
+  String(s).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
+
 export const handleContact: RequestHandler = async (req, res) => {
-  const { fullName, email, phone, message } = req.body;
+  const { fullName, email, phone, message } = req.body ?? {};
 
   // Validate required fields
   if (!fullName || !email || !message) {
@@ -51,13 +60,13 @@ export const handleContact: RequestHandler = async (req, res) => {
       from,
       to,
       replyTo: email || undefined,
-      subject: `New contact form submission from ${fullName}`,
+      subject: `New contact form submission from ${String(fullName).replace(/[\r\n]+/g, " ")}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-        <p><strong>Message:</strong> ${message}</p>
+        <p><strong>Name:</strong> ${esc(fullName)}</p>
+        <p><strong>Email:</strong> ${esc(email)}</p>
+        <p><strong>Phone:</strong> ${esc(phone || "Not provided")}</p>
+        <p><strong>Message:</strong> ${esc(message).replace(/\n/g, "<br />")}</p>
       `,
     });
 

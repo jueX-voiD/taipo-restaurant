@@ -1,6 +1,8 @@
+import fs from "node:fs";
 import path from "node:path";
 import { createServer } from "./index";
 import * as express from "express";
+import { PAGES, REDIRECTS, canonicalPath, renderHead } from "@shared/seo";
 
 const app = createServer();
 const port = process.env.PORT || 3000;
@@ -9,18 +11,50 @@ const port = process.env.PORT || 3000;
 const __dirname = import.meta.dirname;
 const distPath = path.join(__dirname, "../spa");
 
-// Serve static files
-app.use(express.static(distPath));
+// Hashed build assets can be cached for a year; everything else revalidates.
+app.use(
+  "/assets",
+  express.static(path.join(distPath, "assets"), {
+    immutable: true,
+    maxAge: "1y",
+  }),
+);
+app.use(express.static(distPath, { index: false }));
 
-// Handle React Router - serve index.html for all non-API routes.
-// (Express 5 no longer accepts a bare "*" path, so use a catch-all middleware.)
+const indexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf8");
+const SEO_BLOCK = /<!--seo-start-->[\s\S]*?<!--seo-end-->/;
+
+// Render the right SEO <head> into the initial HTML for each route, so
+// crawlers that don't run JavaScript still see per-page tags. Unknown paths
+// get a real 404 status instead of a soft-404.
 app.use((req, res) => {
   // Don't serve index.html for API routes
   if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
     return res.status(404).json({ error: "API endpoint not found" });
   }
 
-  res.sendFile(path.join(distPath, "index.html"));
+  const canonical = canonicalPath(req.path);
+
+  // 301 old React URLs to the URLs that are already indexed.
+  const target = REDIRECTS[canonical];
+  if (target) {
+    const query = req.url.includes("?")
+      ? req.url.slice(req.url.indexOf("?"))
+      : "";
+    return res.redirect(301, target + query);
+  }
+
+  const page = PAGES[canonical];
+  res.type("html").status(page ? 200 : 404);
+  res.setHeader("Cache-Control", "no-cache");
+  res.send(
+    page
+      ? indexHtml.replace(SEO_BLOCK, renderHead(canonical, page))
+      : indexHtml.replace(
+          SEO_BLOCK,
+          '<title>Page Not Found » Taipo</title>\n    <meta name="robots" content="follow, noindex" />',
+        ),
+  );
 });
 
 app.listen(port, () => {

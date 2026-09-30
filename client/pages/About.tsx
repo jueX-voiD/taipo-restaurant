@@ -61,12 +61,7 @@ const galleryRow2 = [
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col s">
-      <Seo
-        title="Taipo: A Culinary Fusion of Tradition and Innovation"
-        description="Discover Taipo, where traditional Nepali flavors meet global influences in Arlington, TX. Experience a unique fusion of bold, diverse, and innovative cuisine."
-        path="/about-us/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Image-17.webp"
-      />
+      <Seo path="/about-us/" />
       <Navbar />
 
       {/* Hero + Story Section */}
@@ -169,7 +164,8 @@ export default function About() {
               >
                 <img
                   src={src}
-                  alt={`Gallery image ${(i % galleryRow1.length) + 1}`}
+                  alt={`Taipo Nepali food and restaurant photo ${(i % galleryRow1.length) + 1}`}
+                  loading="lazy"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -185,7 +181,8 @@ export default function About() {
               >
                 <img
                   src={src}
-                  alt={`Gallery image ${(i % galleryRow2.length) + 12}`}
+                  alt={`Taipo Nepali food and restaurant photo ${(i % galleryRow2.length) + 12}`}
+                  loading="lazy"
                   className="w-full h-full object-contain"
                 />
               </div>

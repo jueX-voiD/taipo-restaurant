@@ -63,15 +63,10 @@ function DownloadSection() {
 export default function Menu() {
   return (
     <div>
-      <Seo
-        title="Discover 5 Must-Try Nepali-Inspired Dishes in Taipo's Menu"
-        description="Explore Taipo’s diverse menu in Arlington, TX, featuring authentic Nepali-inspired dishes like momos and stir-fries. Experience bold flavors and cultural fusion."
-        path="/menu/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Download-pdf.webp"
-      />
+      <Seo path="/menu/" />
       <Navbar />
       <main>
-        <MenuSection showOrderButton={true} />
+        <MenuSection showOrderButton={true} headingAs="h1" />
         <DownloadSection />
       </main>
       <Footer />

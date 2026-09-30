@@ -43,12 +43,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Seo
-        title="Contact Taipo Arlington - Reach Out for Reservations & Inquiries"
-        description="Contact Taipo in Arlington for reservations, questions, or feedback. We're here to assist you with any inquiries related to our authentic Nepali cuisine."
-        path="/contact-us/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/03/taipo-banner.jpg"
-      />
+      <Seo path="/contact-us/" />
       <Navbar />
 
       <section className="flex-1">
@@ -68,7 +63,7 @@ export default function Contact() {
 
                   <div className="flex flex-col gap-5">
                     <div className="flex items-start gap-3">
-                      <img src={location} />
+                      <img src={location} alt="" />
                       <span className="text-taipo-dark text-18 ">
                         200 E Abram St Suite 140,
                         <br />
@@ -76,7 +71,7 @@ export default function Contact() {
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <img src={phone} />
+                      <img src={phone} alt="" />
                       <a
                         href="tel:4696028318"
                         className="text-taipo-dark text-18 hover:text-taipo-teal transition-colors"
@@ -85,7 +80,7 @@ export default function Contact() {
                       </a>
                     </div>
                     <div className="flex items-start gap-3">
-                      <img src={email} />
+                      <img src={email} alt="" />
                       <a
                         href="mailto:reservation@taiporestaurant.com"
                         className="text-taipo-dark text-18 hover:text-taipo-teal transition-colors"
@@ -100,7 +95,8 @@ export default function Contact() {
                 <div className="mt-6 overflow-hidden rounded-full self-start hidden sm:block">
                   <img
                     src={contact}
-                    alt="Taipo dish"
+                    alt="Taipo Nepali dish"
+                    loading="lazy"
                     className="w-full h-full object-cover animate-[spin_30s_linear_infinite]"
                   />
                 </div>

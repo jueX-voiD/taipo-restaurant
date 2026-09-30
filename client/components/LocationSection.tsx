@@ -16,6 +16,7 @@ export default function LocationSection({ className }: { className?: string }) {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7982.274578064961!2d-97.11149178813396!3d32.73565787790121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e7d70e8e8757f%3A0xbe17a14e5e18536a!2s200%20E%20Abram%20St%20%23140%2C%20Arlington%2C%20TX%2076010%2C%20USA!5e0!3m2!1sen!2snp!4v1704487153617!5m2!1sen!2snp"
             className="w-full h-[250px] md:h-[376px] border-0"
             allowFullScreen
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             title="Our Location"
           />

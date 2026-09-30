@@ -79,7 +79,7 @@ const ContactInfo = () => (
   <div className="flex flex-col gap-5 md:mt-16">
     <div className="flex items-start gap-3">
       <div className="shrink-0">
-        <img src={clock} />
+        <img src={clock} alt="" />
       </div>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="text-restaurant-text text-18">Opening times</span>
@@ -93,7 +93,7 @@ const ContactInfo = () => (
 
     <div className="flex items-start gap-3">
       <div className="shrink-0">
-        <img src={location} />
+        <img src={location} alt="" />
       </div>
       <span className="text-restaurant-text text-18">
         200 E Abram St Suite 140,
@@ -688,12 +688,7 @@ export default function Reservation() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#131313]">
-      <Seo
-        title="Taipo - Behind the Door contact for reservation"
-        description="Contact for taipo's behind the door fine dining experience."
-        path="/reservations/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Taipo-Behind-the-Door.webp"
-      />
+      <Seo path="/reservations/" />
       {/* Background video */}
       <video
         ref={videoRef}
@@ -715,9 +710,14 @@ export default function Reservation() {
 
       {/* Logo (top center) */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 z-10">
-        <Link to="/" aria-label="Taipo Home">
-          <img src={behindTheDoor} alt="Taipo" />
-        </Link>
+        <h1>
+          <Link to="/" aria-label="Taipo Home">
+            <img
+              src={behindTheDoor}
+              alt="Taipo - Behind the Door fine dining in Arlington"
+            />
+          </Link>
+        </h1>
       </div>
 
       {/* Bottom center: tagline + reserve button */}

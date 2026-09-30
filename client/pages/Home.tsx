@@ -39,16 +39,20 @@ function HeroSection() {
       <img
         src={heroSectionBg}
         alt=""
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-5 text-center pt-[160px] md:pb-[340px] pb-[160px]">
-        <img
-          src={heroSectionLogo}
-          alt="Taipo logo"
-          className="w-[clamp(15.5rem,12.5804rem+12.9762vw,22.3125rem)] h-auto"
-        />
+        <h1>
+          <img
+            src={heroSectionLogo}
+            alt="Taipo - Authentic Nepali Cuisine in Arlington, TX"
+            fetchPriority="high"
+            className="w-[clamp(15.5rem,12.5804rem+12.9762vw,22.3125rem)] h-auto"
+          />
+        </h1>
         <img
           src={withLoveFromNepal}
           alt="With love from Nepal"
@@ -84,7 +88,9 @@ function SpecialsSection() {
               <div className="w-full max-w-[308px] sm:px-[38px] px-[20px] overflow-hidden relative flex-shrink-0">
                 <img
                   src={item.img}
-                  alt={item.name}
+                  alt={`${item.name} at Taipo Arlington`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-all duration-[800ms] ease-in-out group-hover:rotate-[15deg]"
                 />
               </div>
@@ -121,7 +127,9 @@ function RestaurantSection() {
           <div className="flex-shrink-0 w-full md:w-auto">
             <img
               src={taipoRestaurant}
-              alt="Restaurant interior"
+              alt="Taipo Nepali restaurant interior in Arlington, TX"
+              loading="lazy"
+              decoding="async"
               className="w-full lg:w-[512px] h-auto object-cover"
             />
           </div>
@@ -144,12 +152,7 @@ function RestaurantSection() {
 export default function Home() {
   return (
     <div>
-      <Seo
-        title="Experience Authentic Nepali Cuisine in Arlington - Taipo"
-        description="Discover Taipo in Arlington, TX, for authentic Nepali cuisine infused with global flavors. Order online or visit us for an unforgettable dining experience."
-        path="/"
-        image="https://www.taiporestaurants.com/wp-content/uploads/2024/03/taipo-banner.jpg"
-      />
+      <Seo path="/" />
       <Navbar />
       <main>
         <HeroSection />

@@ -111,7 +111,8 @@ export default function InstagramSection() {
               >
                 <img
                   src={src}
-                  alt={`Instagram post ${i + 1}`}
+                  alt={`Taipo Arlington Instagram post ${i + 1}`}
+                  loading="lazy"
                   className="w-full aspect-[4/5] object-contain"
                 />
               </a>
