@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Seo from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LocationSection from "@/components/LocationSection";
@@ -42,6 +43,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo
+        title="Contact Taipo Arlington - Reach Out for Reservations & Inquiries"
+        description="Contact Taipo in Arlington for reservations, questions, or feedback. We're here to assist you with any inquiries related to our authentic Nepali cuisine."
+        path="/contact-us/"
+        image="https://www.taiporestaurants.com/wp-content/uploads/2024/03/taipo-banner.jpg"
+      />
       <Navbar />
 
       <section className="flex-1">

@@ -7,10 +7,10 @@ import headerBg from "@/assets/Header-bg.webp";
 
 const navLinks = [
   { label: "Menu", to: "/menu" },
-  { label: "About", to: "/about" },
-  { label: "Order Online", to: "/order" },
-  { label: "Contact", to: "/contact" },
-  { label: "Taipo - Behind the Door", to: "/reservation" },
+  { label: "About", to: "/about-us" },
+  { label: "Order Online", to: "/order-now" },
+  { label: "Contact", to: "/contact-us" },
+  { label: "Taipo - Behind the Door", to: "/reservations" },
 ];
 
 export default function Navbar() {
@@ -37,7 +37,7 @@ export default function Navbar() {
               Menu
             </Link>
             <Link
-              to="/order"
+              to="/order-now"
               className="text-18 text-white hover:opacity-80 transition-opacity"
             >
               Order Now
@@ -97,7 +97,7 @@ export default function Navbar() {
           "fixed inset-0 z-[100] h-screen w-full bg-taipo-teal flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-out",
           open
             ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0 pointer-events-none",
+            : "-translate-y-full opacity-0 pointer-events-none invisible",
         )}
       >
         <img

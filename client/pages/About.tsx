@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import TaipoButton from "@/components/ui/TaipoButton";
 import TaipoButtonSecondary from "@/components/ui/TaipoButtonSecondary";
+import Seo from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import aboutbg from "@/assets/about-background.webp";
@@ -60,6 +61,12 @@ const galleryRow2 = [
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col s">
+      <Seo
+        title="Taipo: A Culinary Fusion of Tradition and Innovation"
+        description="Discover Taipo, where traditional Nepali flavors meet global influences in Arlington, TX. Experience a unique fusion of bold, diverse, and innovative cuisine."
+        path="/about-us/"
+        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Image-17.webp"
+      />
       <Navbar />
 
       {/* Hero + Story Section */}

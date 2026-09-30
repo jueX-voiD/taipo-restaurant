@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Seo from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MenuSection from "@/components/MenuSection";
@@ -127,6 +128,12 @@ function SpecialsSection() {
 export default function OrderNow() {
   return (
     <div className="bg-taipo">
+      <Seo
+        title="Order Nepali-Inspired Cuisine Online in Arlington - Taipo"
+        description="Order authentic Nepali-inspired dishes from Taipo in Arlington, TX, for pickup or delivery. Enjoy bold flavors with the convenience of online ordering."
+        path="/order-now/"
+        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Uber-Delivery.webp"
+      />
       <Navbar />
       <main>
         <HeroSection />

@@ -1,5 +1,6 @@
 import TaipoButton from "@/components/ui/TaipoButton";
 import TaipoButtonSecondary from "@/components/ui/TaipoButtonSecondary";
+import Seo from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MenuSection from "@/components/MenuSection";
@@ -53,7 +54,7 @@ function HeroSection() {
           alt="With love from Nepal"
           className="h-auto self-end left-5 relative"
         />
-        <TaipoButton to="/order" className="mt-9 text-[var(--primary)]">
+        <TaipoButton to="/order-now" className="mt-9 text-[var(--primary)]">
           Order Now
         </TaipoButton>
       </div>
@@ -128,7 +129,7 @@ function RestaurantSection() {
           <div className="flex flex-col gap-4">
             <h2 className="text-72 uppercase">taipo- Behind the door</h2>
             <TaipoButtonSecondary
-              to="/about"
+              to="/about-us"
               className="hover:bg-[var(--secondary)] hover:text-[var(--white)]"
             >
               Explore
@@ -143,6 +144,12 @@ function RestaurantSection() {
 export default function Home() {
   return (
     <div>
+      <Seo
+        title="Experience Authentic Nepali Cuisine in Arlington - Taipo"
+        description="Discover Taipo in Arlington, TX, for authentic Nepali cuisine infused with global flavors. Order online or visit us for an unforgettable dining experience."
+        path="/"
+        image="https://www.taiporestaurants.com/wp-content/uploads/2024/03/taipo-banner.jpg"
+      />
       <Navbar />
       <main>
         <HeroSection />

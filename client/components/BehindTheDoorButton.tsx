@@ -5,7 +5,7 @@ import doorOpen from "@/assets/icons/Door-btn-open-flatside.svg";
 export default function BehindTheDoorButton() {
   return (
     <Link
-      to="/reservation"
+      to="/reservations"
       aria-label="Taipo Behind The Door"
       className="group fixed right-[5vw] bottom-[10vh] z-40 inline-block"
     >

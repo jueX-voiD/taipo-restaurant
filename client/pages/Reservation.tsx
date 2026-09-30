@@ -1,3 +1,4 @@
+import Seo from "@/components/Seo";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -687,6 +688,12 @@ export default function Reservation() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#131313]">
+      <Seo
+        title="Taipo - Behind the Door contact for reservation"
+        description="Contact for taipo's behind the door fine dining experience."
+        path="/reservations/"
+        image="https://www.taiporestaurants.com/wp-content/uploads/2024/01/Taipo-Behind-the-Door.webp"
+      />
       {/* Background video */}
       <video
         ref={videoRef}

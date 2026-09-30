@@ -1,3 +1,4 @@
+import Seo from "@/components/Seo";
 import TaipoButtonSecondary from "@/components/ui/TaipoButtonSecondary";
 import bg404 from "@/assets/404-bg.webp";
 import error404 from "@/assets/404_Error.svg";
@@ -6,6 +7,7 @@ import errorbg from "@/assets/404-container-bg.webp";
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-taipo flex flex-col items-center justify-center px-5 text-center ">
+      <Seo title="Page Not Found » Taipo" path="/404" noindex />
       <div className="absolute top-0 w-full">
         <img src={bg404} className="object-cover h-[327px] min-w-full" />
       </div>
