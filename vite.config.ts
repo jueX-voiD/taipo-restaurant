@@ -15,10 +15,6 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
-    // Embed the woff2 fonts in the CSS so iOS Safari never has to fetch them
-    // as separate requests. (Everything else keeps Vite's default 4 KB limit.)
-    assetsInlineLimit: (filePath) =>
-      filePath.endsWith(".woff2") ? true : undefined,
   },
   plugins: [react(), expressPlugin()],
   resolve: {

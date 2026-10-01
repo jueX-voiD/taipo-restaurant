@@ -105,7 +105,7 @@ The production server will run on `http://localhost:3000` (or the port specified
 ## Testing Email Functionality
 
 ### Contact Form
-1. Go to `/contact` page
+1. Go to `/contact-us` page
 2. Fill in the form (Name, Email, Phone, Message)
 3. Click "Submit"
 4. Check your email (the one set in `MAIL_TO`) for the submission
@@ -142,6 +142,51 @@ The reservation form follows the same pattern and uses the same email configurat
    pm2 start "pnpm start" --name taipo-website
    ```
 5. Set up a reverse proxy (nginx) if needed for port 80/443
+
+### Option 4: cPanel "Setup Node.js App" (what the demo site uses)
+
+The production server only runs the **built** output in `dist/` (the source
+folders are never executed), and shared hosting usually cannot run the build,
+so build on your own computer and upload the result.
+
+Server settings (Setup Node.js App): Node.js 20.19+ (22/24 also fine),
+Application mode **Production**, Application root `repositories/taipo-restaurant`,
+Startup file `app.cjs`, plus the `SMTP_*`, `MAIL_FROM` and `MAIL_TO` environment
+variables.
+
+**Deploy checklist**
+
+1. Push the code to GitHub, then in cPanel > Git Version Control click
+   **Update from Remote**.
+2. On your computer build a fresh zip (delete the old zip first, otherwise
+   `zip` keeps stale files from the previous build inside it):
+   ```bash
+   rm -f dist.zip && pnpm build && zip -r dist.zip dist
+   ```
+3. On the server delete the old `dist` folder, upload `dist.zip` to the app
+   root and extract it, then delete the zip. You should end up with
+   `dist/server/node-build.mjs` and `dist/spa/index.html` (not `dist/dist/...`).
+4. Only if `package.json` changed, in the cPanel terminal:
+   ```bash
+   source ~/nodevenv/repositories/taipo-restaurant/20/bin/activate && cd ~/repositories/taipo-restaurant
+   npm install --omit=dev
+   ```
+5. Stop old app processes. The **Restart** button does not always kill them,
+   and an old process keeps serving the previous build from memory (this
+   caused missing fonts on iPhones that had no cached copy):
+   ```bash
+   ps -u goldenja -o pid,lstart,cmd | grep lsnode | grep -v grep
+   kill <PID>   # any process that started before your upload
+   ```
+6. In Setup Node.js App click **Restart** (or Stop, then Start), then run the
+   `ps` command again and confirm the start time is fresh.
+7. Test in a private window: `/api/ping` returns `{"message":"ping"}`, a made-up
+   URL shows the 404 page, `/taipo-favicon.svg` loads, both forms send email.
+   Test on an iPhone with Safari's cache cleared (Settings > Safari > Clear
+   History and Website Data).
+
+If the site still works after deleting `dist`, an old process is serving it
+from memory: see step 5.
 
 ## Important Notes
 
