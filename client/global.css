@@ -121,6 +121,16 @@
   }
 }
 
+@keyframes logo-fade {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @keyframes marquee-rtl {
   from {
     transform: translateX(0);

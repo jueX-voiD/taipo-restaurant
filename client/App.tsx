@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import { ReactLenis, useLenis } from "lenis/react";
 import { Suspense, lazy, useEffect } from "react";
+import PageLoader from "@/components/PageLoader";
 import Home from "./pages/Home";
 
 // Home ships in the main bundle; every other page loads on demand.
@@ -41,7 +42,7 @@ const App = () => (
     <ReactLenis root options={{ lerp: 0.1 }}>
       <BrowserRouter>
         <ScrollToTop />
-        <Suspense fallback={null}>
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
