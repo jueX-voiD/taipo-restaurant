@@ -1,6 +1,4 @@
 import Seo from "@/components/Seo";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import MenuSection from "@/components/MenuSection";
 import downloadmenu from "@/assets/download-menu.webp";
 import menuPdf from "@/assets/taipo-wall-menu.pdf";
@@ -64,12 +62,10 @@ export default function Menu() {
   return (
     <div>
       <Seo path="/menu/" />
-      <Navbar />
       <main>
         <MenuSection showOrderButton={true} headingAs="h1" />
         <DownloadSection />
       </main>
-      <Footer />
     </div>
   );
 }

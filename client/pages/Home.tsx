@@ -1,8 +1,6 @@
 import TaipoButton from "@/components/ui/TaipoButton";
 import TaipoButtonSecondary from "@/components/ui/TaipoButtonSecondary";
 import Seo from "@/components/Seo";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import MenuSection from "@/components/MenuSection";
 import LocationSection from "@/components/LocationSection";
 import InstagramSection from "@/components/InstagramSection";
@@ -153,7 +151,6 @@ export default function Home() {
   return (
     <div>
       <Seo path="/" />
-      <Navbar />
       <main>
         <HeroSection />
         <SpecialsSection />
@@ -162,7 +159,6 @@ export default function Home() {
         <LocationSection />
         <InstagramSection />
       </main>
-      <Footer />
     </div>
   );
 }

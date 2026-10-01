@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import MenuSection from "@/components/MenuSection";
 import LocationSection from "@/components/LocationSection";
 import InstagramSection from "@/components/InstagramSection";
@@ -127,15 +125,13 @@ function SpecialsSection() {
 
 export default function OrderNow() {
   return (
-    <div className="bg-taipo">
+    <div className="bg-taipo flex-1">
       <Seo path="/order-now/" />
-      <Navbar />
       <main>
         <HeroSection />
         <SpecialsSection />
         <InstagramSection />
       </main>
-      <Footer />
     </div>
   );
 }

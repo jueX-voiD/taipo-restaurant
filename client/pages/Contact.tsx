@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Seo from "@/components/Seo";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import LocationSection from "@/components/LocationSection";
 import location from "@/assets/icons/location.svg";
 import phone from "@/assets/icons/phone.svg";
@@ -42,10 +40,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex-1 flex flex-col">
       <Seo path="/contact-us/" />
-      <Navbar />
-
       <section className="flex-1">
         {/* Contact Section */}
         <div className="bg-taipo-light py-14 md:py-20">
@@ -243,8 +239,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

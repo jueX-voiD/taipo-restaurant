@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import TaipoButton from "@/components/ui/TaipoButton";
 import TaipoButtonSecondary from "@/components/ui/TaipoButtonSecondary";
 import Seo from "@/components/Seo";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import aboutbg from "@/assets/about-background.webp";
 import aboutContainerbg from "@/assets/About-container-bg.webp";
 import aboutcardbg from "@/assets/About-bg.webp";
@@ -60,10 +58,8 @@ const galleryRow2 = [
 
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col s">
+    <div className="flex-1 flex flex-col">
       <Seo path="/about-us/" />
-      <Navbar />
-
       {/* Hero + Story Section */}
       <section className="bg-[#E9FCFB] relative overflow-hidden px-5">
         {/* Decorative top watermark */}
@@ -190,8 +186,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }
