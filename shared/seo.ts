@@ -6,9 +6,9 @@
 
 export const SITE_URL = "https://www.taiporestaurants.com";
 export const SITE_NAME = "Taipo";
-const UPLOADS = `${SITE_URL}/wp-content/uploads`;
-const BANNER = `${UPLOADS}/2024/03/taipo-banner.jpg`;
-const LOGO = `${UPLOADS}/2024/03/taipo-google.jpg`;
+const IMG = `${SITE_URL}/og`;
+const BANNER = `${IMG}/taipo-share.jpg`;
+const LOGO = `${IMG}/taipo-logo.png`;
 
 export const ROBOTS_INDEX =
   "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large";
@@ -33,14 +33,14 @@ export const PAGES: Record<string, PageSeo> = {
     title: "Discover 5 Must-Try Nepali-Inspired Dishes in Taipo's Menu",
     description:
       "Explore Taipo’s diverse menu in Arlington, TX, featuring authentic Nepali-inspired dishes like momos and stir-fries. Experience bold flavors and cultural fusion.",
-    image: `${UPLOADS}/2024/01/Download-pdf.webp`,
+    image: `${IMG}/menu.webp`,
     crumb: "Menu",
   },
   "/about-us/": {
     title: "Taipo: A Culinary Fusion of Tradition and Innovation",
     description:
       "Discover Taipo, where traditional Nepali flavors meet global influences in Arlington, TX. Experience a unique fusion of bold, diverse, and innovative cuisine.",
-    image: `${UPLOADS}/2024/01/Image-17.webp`,
+    image: `${IMG}/about.webp`,
     crumb: "About Us",
   },
   "/contact-us/": {
@@ -53,14 +53,14 @@ export const PAGES: Record<string, PageSeo> = {
   "/reservations/": {
     title: "Taipo - Behind the Door contact for reservation",
     description: "Contact for taipo's behind the door fine dining experience.",
-    image: `${UPLOADS}/2024/01/Taipo-Behind-the-Door.webp`,
+    image: `${IMG}/behind-the-door.webp`,
     crumb: "Reservations",
   },
   "/order-now/": {
     title: "Order Nepali-Inspired Cuisine Online in Arlington - Taipo",
     description:
       "Order authentic Nepali-inspired dishes from Taipo in Arlington, TX, for pickup or delivery. Enjoy bold flavors with the convenience of online ordering.",
-    image: `${UPLOADS}/2024/01/Uber-Delivery.webp`,
+    image: `${IMG}/order-now.webp`,
     crumb: "Order Now",
   },
 };
