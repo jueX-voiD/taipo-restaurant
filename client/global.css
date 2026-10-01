@@ -1,6 +1,9 @@
 @font-face {
   font-family: "SofiaPro";
-  src: url("./assets/fonts/SofiaProRegular.woff2") format("woff2");
+  src:
+    url("./assets/fonts/SofiaProRegular.woff2") format("woff2"),
+    url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Regular-Az.otf")
+      format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +11,10 @@
 
 @font-face {
   font-family: "SofiaPro";
-  src: url("./assets/fonts/SofiaProMedium.woff2") format("woff2");
+  src:
+    url("./assets/fonts/SofiaProMedium.woff2") format("woff2"),
+    url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Medium-Az.otf")
+      format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -16,7 +22,10 @@
 
 @font-face {
   font-family: "SofiaPro";
-  src: url("./assets/fonts/SofiaProSemiBold.woff2") format("woff2");
+  src:
+    url("./assets/fonts/SofiaProSemiBold.woff2") format("woff2"),
+    url("./assets/fonts/sofia-pro/fonnts.com-Sofia-Pro-Semi-Bold-Az.otf")
+      format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
