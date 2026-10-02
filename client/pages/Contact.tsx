@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatUsPhone } from "@/lib/phone";
 import Seo from "@/components/Seo";
 import LocationSection from "@/components/LocationSection";
 import location from "@/assets/icons/location.svg";
@@ -13,9 +14,17 @@ export default function Contact() {
     phone: "",
     message: "",
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    // Phone is optional, but if given it must be a full 10-digit US number.
+    if (formData.phone && formData.phone.length !== 10) {
+      alert("Please enter a valid 10-digit US phone number.");
+      return;
+    }
+    setSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -36,6 +45,8 @@ export default function Contact() {
       alert(
         err?.message ?? "Network or server error – please try again later.",
       );
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -138,15 +149,27 @@ export default function Contact() {
                     <label className=" text-taipo-dark font-SofiaPro text-18 font-medium leading-[26px]">
                       Phone number
                     </label>
-                    <input
-                      type="tel"
-                      placeholder="9800000000"
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      className="w-full bg-taipo-bg-input px-5 py-[14px] font-SofiaPro text-18 text-taipo-dark placeholder:text-taipo-text-muted outline-none focus:ring-2 focus:ring-taipo-teal/40"
-                    />
+                    <div className="flex w-full items-center bg-taipo-bg-input focus-within:ring-2 focus-within:ring-taipo-teal/40">
+                      <span className="pl-5 font-SofiaPro text-18 text-taipo-dark">
+                        +1
+                      </span>
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        autoComplete="tel-national"
+                        placeholder="(000) 000-0000"
+                        value={formatUsPhone(formData.phone)}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            phone: e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 10),
+                          })
+                        }
+                        className="min-w-0 flex-1 bg-transparent py-[14px] pl-2 pr-5 font-SofiaPro text-18 text-taipo-dark placeholder:text-taipo-text-muted outline-none"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -173,8 +196,33 @@ export default function Contact() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="bg-taipo-teal text-white font-SofiaPro text-[20px] font-medium py-[14px] px-8 w-full sm:w-[260px] hover:bg-taipo-teal-dark transition-colors"
+                  disabled={submitting}
+                  aria-busy={submitting}
+                  className="flex items-center justify-center gap-3 bg-taipo-teal text-white font-SofiaPro text-[20px] font-medium py-[14px] px-8 w-full sm:w-[260px] hover:bg-taipo-teal-dark transition-colors disabled:opacity-80 disabled:cursor-wait"
                 >
+                  {submitting && (
+                    <svg
+                      className="h-5 w-5 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                        stroke="currentColor"
+                        strokeOpacity="0.3"
+                        strokeWidth="3"
+                      />
+                      <path
+                        d="M21 12a9 9 0 0 0-9-9"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  )}
                   Submit
                 </button>
               </form>

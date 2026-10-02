@@ -1,3 +1,4 @@
+import { formatUsPhone } from "@/lib/phone";
 import Seo from "@/components/Seo";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -215,7 +216,25 @@ const FormInput = ({
             min={min}
             max={max}
             readOnly={readOnly}
-            className="flex-1 min-w-0 bg-transparent text-18 outline-none"
+            // Open the date picker when clicking anywhere on the field, not
+            // just on the calendar icon.
+            onClick={
+              type === "date"
+                ? (e) => {
+                    try {
+                      e.currentTarget.showPicker?.();
+                    } catch {
+                      // showPicker can throw when not allowed; the browser's
+                      // default behaviour still works then.
+                    }
+                  }
+                : undefined
+            }
+            className={cn(
+              "flex-1 min-w-0 bg-transparent text-18 outline-none",
+              type === "date" &&
+                "cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer",
+            )}
             style={{
               color: value ? "#DFE3E3" : "#565656",
               colorScheme: "dark",
@@ -385,9 +404,9 @@ const Step2Form = ({
           />
           <FormInput
             label="Phone Number"
-            value={phone}
+            value={formatUsPhone(phone)}
             onChange={(v) => setPhone(v.replace(/\D/g, "").slice(0, 10))}
-            placeholder="4696028318"
+            placeholder="(000) 000-0000"
             type="tel"
             prefix="+1"
           />

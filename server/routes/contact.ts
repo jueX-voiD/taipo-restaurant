@@ -41,6 +41,13 @@ const esc = (s: unknown) =>
       ]!,
   );
 
+/** Reduce input to a 10-digit US number (drops a leading 1), or null. */
+const usDigits = (phone: unknown) => {
+  let digits = String(phone ?? "").replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
+  return digits.length === 10 ? digits : null;
+};
+
 export const handleContact: RequestHandler = async (req, res) => {
   const { fullName, email, phone, message } = req.body ?? {};
 
@@ -52,20 +59,36 @@ export const handleContact: RequestHandler = async (req, res) => {
     });
   }
 
+  // Phone is optional; if given it must be a valid US number.
+  const phoneDigits = usDigits(phone);
+  if (String(phone ?? "").trim() !== "" && !phoneDigits) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide a valid US phone number.",
+    });
+  }
+
   try {
     const from = process.env.MAIL_FROM!;
     const to = process.env.MAIL_TO || from;
+    const phoneText = phoneDigits
+      ? `+1 (${phoneDigits.slice(0, 3)}) ${phoneDigits.slice(3, 6)}-${phoneDigits.slice(6)}`
+      : null;
 
     await getTransporter().sendMail({
       from,
       to,
       replyTo: email || undefined,
-      subject: `New contact form submission from ${String(fullName).replace(/[\r\n]+/g, " ")}`,
+      subject: "Contact Us",
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${esc(fullName)}</p>
-        <p><strong>Email:</strong> ${esc(email)}</p>
-        <p><strong>Phone:</strong> ${esc(phone || "Not provided")}</p>
+        <p><strong>Email:</strong> <a href="mailto:${esc(email)}">${esc(email)}</a></p>
+        <p><strong>Phone:</strong> ${
+          phoneText
+            ? `<a href="tel:+1${phoneDigits}">${esc(phoneText)}</a>`
+            : "Not provided"
+        }</p>
         <p><strong>Message:</strong> ${esc(message).replace(/\n/g, "<br />")}</p>
       `,
     });

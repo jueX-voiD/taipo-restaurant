@@ -69,10 +69,20 @@ export const handleReservation: RequestHandler = async (req, res) => {
     } satisfies ReservationResponse);
   }
 
-  const rows: [string, string][] = [
+  // [label, value, optional link] - links make the phone/email tappable in
+  // the email client (tel: / mailto:).
+  const rows: [string, string, string?][] = [
     ["Name", body.name!],
-    ["Phone", `+1 ${phoneDigits}`],
-    ["Email", body.email || "—"],
+    [
+      "Phone",
+      `+1 (${phoneDigits.slice(0, 3)}) ${phoneDigits.slice(3, 6)}-${phoneDigits.slice(6, 10)}`,
+      `tel:+1${phoneDigits.slice(0, 10)}`,
+    ],
+    [
+      "Email",
+      body.email || "—",
+      body.email ? `mailto:${body.email}` : undefined,
+    ],
     ["Party size", `${body.partySize} guest(s)`],
     ["Date", body.date!],
     ["Time", body.bookingTime!],
@@ -84,10 +94,14 @@ export const handleReservation: RequestHandler = async (req, res) => {
     <table style="font-family:sans-serif;border-collapse:collapse">
       ${rows
         .map(
-          ([k, v]) =>
+          ([k, v, href]) =>
             `<tr><td style="padding:6px 12px;font-weight:bold">${esc(
               k,
-            )}</td><td style="padding:6px 12px">${esc(String(v))}</td></tr>`,
+            )}</td><td style="padding:6px 12px">${
+              href
+                ? `<a href="${esc(href)}" style="color:#00a79f">${esc(String(v))}</a>`
+                : esc(String(v))
+            }</td></tr>`,
         )
         .join("")}
     </table>`;
@@ -101,7 +115,7 @@ export const handleReservation: RequestHandler = async (req, res) => {
       from,
       to,
       replyTo: body.email || undefined,
-      subject: `New reservation – ${body.name} (${body.partySize} guests, ${body.date})`,
+      subject: "Taipo Reservation",
       html,
       text,
     });
